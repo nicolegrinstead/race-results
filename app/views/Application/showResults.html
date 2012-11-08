@@ -1,0 +1,64 @@
+#{extends 'main.html' /}
+#{set title:'Race Results' /}
+<h1>Results for: ${race.eventName}</h1>
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+   google.load('visualization', '1', {packages: ['table', 'columnchart', 'corechart', 'imagechart']});
+</script>
+
+<script type="text/javascript">
+
+function drawVisualization() {
+	$("#filter").click(function(){
+	      console.log("hi");
+	    });
+
+	var jsonData = $.ajax({
+      url: "results-json",
+      dataType:"json",
+      data: {raceId : ${race.id}},
+      async: false
+  }).responseText;
+  
+  var summaryJson = $.ajax({
+      url: "time-chart-json",
+      dataType:"json",
+      data: {raceId : ${race.id}},
+      async: false
+  }).responseText;
+  
+  // Create our data table out of JSON data loaded from server.
+  var data = new google.visualization.DataTable(jsonData);
+
+  var summaryData = google.visualization.arrayToDataTable(jQuery.parseJSON(summaryJson), true);
+  
+  // Create and draw the visualization.
+  var table = new google.visualization.Table(document.getElementById('table'));
+  table.draw(data, {'allowHtml': true});
+  
+  var options = {cht: 'bvs', xAxis: {title: 'Year'}, title:"Number of finishers by time"};
+  // Create and draw the visualization.
+  new google.visualization.ImageChart(document.getElementById('visualization')).
+    draw(summaryData,options);
+
+}
+
+google.setOnLoadCallback(drawVisualization);
+</script>
+
+<div id="visualization"></div>
+<br/>
+Filter Results: 
+	Division : <select>
+		#{list race.divisions, as:'division' }
+		<option>
+			${division}
+		</option>
+		#{/list}
+	</select>
+
+<button id="filter">Filter!!</button>
+
+<br/>
+<div id="table" style ="margin-top:20px;"></div>

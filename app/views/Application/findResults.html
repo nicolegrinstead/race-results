@@ -1,0 +1,9 @@
+#{extends 'main.html' /} #{set title:'Search Results' /}
+
+<h1>Choose an event</h1>
+#{list items:races, as:'race' }
+<li>
+	<a href="@{Application.showResults()}?raceId=${race.id}">${race.eventName} on ${race.eventDate}</a>
+</li>
+#{/list}
+

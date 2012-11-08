@@ -1,0 +1,14 @@
+#{extends 'main.html' /}
+#{set title:'Find Race Results' /}
+
+Nothing's done yet find a race...
+
+<form action="@{Application.findResults()}" method="GET">
+    Event Name: <input type="text" name="eventName" /> 
+    Event Date: <input type="text" name="date" /> 
+    Event City and State: <input type="text" name="cityState" /> 
+	or
+    Event Zip: <input type="text" name="zip" /> 
+
+    <input type="submit" value="Search!" />
+</form> 

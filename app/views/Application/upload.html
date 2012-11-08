@@ -1,0 +1,67 @@
+#{extends 'main.html' /}
+#{set title:'Upload' /}
+
+#{ifErrors}
+   <h3>Oops…</h3>
+#{/ifErrors}
+
+<form action="@{Application.uploadSubmit()}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+    <fieldset>
+	    <legend>Enter event details:</legend>
+	    #{field 'race.eventName'}
+        <div class="control-group#{ifError field.name} error#{/ifError}">
+        	<label class="control-label bold" for="${field.id}">Event Name:</label>
+            <div class="controls">
+	            <input id="${field.id}" type="text" name="${field.name}" value="${field.value}" />
+	             #{ifError field.name}<span class="help-inline">${field.error}</span>#{/ifError}
+            </div>
+	    </div>
+	    #{/field}
+	    #{field 'race.eventDate'}
+        <div class="control-group#{ifError field.name} error#{/ifError}">
+        	<label class="control-label bold" for="${field.id}">Date:</label>
+            <div class="controls">
+	            <input id="${field.id}" type="text" name="${field.name}" value="${field.value}" />
+	             #{ifError field.name}<span class="help-inline">${field.error}</span>#{/ifError}
+            </div>
+	    </div>
+	    #{/field}
+	    #{field 'race.city'}
+        <div class="control-group#{ifError field.name} error#{/ifError}">
+        	<label class="control-label bold" for="${field.id}">City:</label>
+            <div class="controls">
+	            <input id="${field.id}" type="text" name="${field.name}" value="${field.value}" />
+	             #{ifError field.name}<span class="help-inline">${field.error}</span>#{/ifError}
+            </div>
+	    </div>
+	    #{/field}
+	    #{field 'race.state'}
+        <div class="control-group#{ifError field.name} error#{/ifError}">
+        	<label class="control-label bold" for="${field.id}">State:</label>
+            <div class="controls">
+	            <input id="${field.id}" type="text" name="${field.name}" value="${field.value}" />
+	             #{ifError field.name}<span class="help-inline">${field.error}</span>#{/ifError}
+            </div>
+	    </div>
+	    #{/field}
+	    #{field 'race.zip'}
+        <div class="control-group#{ifError field.name} error#{/ifError}">
+        	<label class="control-label bold" for="${field.id}">Zip:</label>
+            <div class="controls">
+	            <input id="${field.id}" type="text" name="${field.name}" value="${field.value}" />
+	             #{ifError field.name}<span class="help-inline">${field.error}</span>#{/ifError}
+            </div>
+	    </div>
+	    #{/field}
+        <div class="control-group">
+	    	<label class="control-label">Results File: </label>
+	    	<div class="controls">
+	    		<input type="file" id="resultsCsv" name="resultsCsv" value="${flash.resultsCsv}" />
+             	<span class="help-inline">#{error 'file'/}</span>
+            </div>
+	    </div>
+       <div class="form-actions">
+	    	<button type="submit" value="Create Race" class="btn btn-primary">Create Race!</button>
+       </div>	
+	 </fieldset>
+</form> 

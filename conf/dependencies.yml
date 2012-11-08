@@ -1,0 +1,7 @@
+# Application dependencies
+
+require:
+    - play
+    - net.sf.opencsv -> opencsv 2.0
+    - net.sf.flexjson -> flexjson 2.1
+    - com.google.guava -> guava r09
